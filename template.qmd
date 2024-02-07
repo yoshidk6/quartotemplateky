@@ -30,7 +30,6 @@ old_hooks <-
 library(tidyverse)
 library(glue)
 library(here)
-library(corrplot)
 
 theme_set(theme_linedraw(base_size = 12))
 ```
