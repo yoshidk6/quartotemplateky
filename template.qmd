@@ -1,5 +1,5 @@
 ---
-title: "Exploratory data analysis"
+title: "Title"
 author: "Kenta Yoshida"
 format:
   html:
@@ -11,23 +11,60 @@ format:
 date: "`r Sys.Date()`"
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-```{r}
-1 + 1
-```
-
-You can add options to executable code like this 
 
 ```{r}
 #| echo: false
-2 * 2
+#| output: asis
+# Handle colored text outputs
+options(crayon.enabled = TRUE)
+old_hooks <-
+  fansi::set_knit_hooks(knitr::knit_hooks,
+                        which = c("output", "message", "error", "warning"))
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+```{r, setup}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(glue)
+library(here)
+library(corrplot)
+
+theme_set(theme_linedraw(base_size = 12))
+```
+
+# Notes
+
+
+# Import data
+
+```{r}
+
+```
+
+
+# Section
+
+```{r}
+warning("warning")
+message("message")
+print("output")
+
+pressure %>% 
+  mutate(group = ifelse(temperature < 150, "group a", "group b")) %>% 
+  ggplot(aes(temperature, pressure, color = group)) +
+  geom_point() +
+  facet_wrap(~group) +
+  labs(title = "Example figure of how it looks like",
+       subtitle = "with theme settings")
+
+```
+
+
+# Session info
+
+```{r}
+devtools::session_info()
+```
